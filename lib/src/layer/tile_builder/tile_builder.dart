@@ -71,9 +71,9 @@ final TileBuilder darkModeTileBuilder =
 /// Shows coordinates over Tiles
 final TileBuilder coordinateDebugTileBuilder =
     (BuildContext context, Widget tileWidget, Tile tile) {
-  final coords = tile.coords;
+  final coords = tile.coords!;
   final readableKey =
-      '${coords.x.floor()} : ${coords.y.floor()} : ${coords.z.floor()}';
+      '${coords.x.floor()} : ${coords.y.floor()} : ${coords.z!.floor()}';
 
   return Container(
     decoration: BoxDecoration(
@@ -102,7 +102,7 @@ final TileBuilder loadingTimeDebugTileBuilder =
 
   final time = loaded == null
       ? 'Loading'
-      : '${(loaded.millisecond - loadStarted.millisecond).abs()} ms';
+      : '${(loaded.millisecond - loadStarted!.millisecond).abs()} ms';
 
   return Container(
     decoration: BoxDecoration(

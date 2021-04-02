@@ -4,30 +4,30 @@ import 'package:flutter_map/src/map/map.dart';
 
 /// [LayerOptions] that describe a layer composed by multiple built-in layers.
 class GroupLayerOptions extends LayerOptions {
-  List<LayerOptions> group = <LayerOptions>[];
+  List<LayerOptions>? group = <LayerOptions>[];
 
   GroupLayerOptions({
-    Key key,
+    Key? key,
     this.group,
-    Stream<Null> rebuild,
+    Stream<Null>? rebuild,
   }) : super(key: key, rebuild: rebuild);
 }
 
 class GroupLayerWidget extends StatelessWidget {
   final GroupLayerOptions options;
 
-  GroupLayerWidget({Key key, @required this.options}) : super(key: key);
+  GroupLayerWidget({Key? key, required this.options}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final mapState = MapState.of(context);
+    final mapState = MapState.of(context)!;
     return GroupLayer(options, mapState, mapState.onMoved);
   }
 }
 
 class GroupLayer extends StatelessWidget {
   final GroupLayerOptions groupOpts;
-  final MapState map;
+  final MapState? map;
   final Stream<Null> stream;
 
   GroupLayer(this.groupOpts, this.map, this.stream) : super(key: groupOpts.key);
@@ -38,7 +38,7 @@ class GroupLayer extends StatelessWidget {
       stream: stream,
       builder: (BuildContext context, _) {
         var layers = <Widget>[
-          for (var options in groupOpts.group) _createLayer(options)
+          for (var options in groupOpts.group!) _createLayer(options)
         ];
 
         return Container(
